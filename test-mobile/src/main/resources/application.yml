@@ -1,0 +1,70 @@
+spring:
+  profiles:
+    active: dev #默认为开发环境
+#  profiles:
+#    active:
+#      - dev #默认为开发环境
+#    include:
+#    - push #消息推送
+#    - sms #短信
+  jackson:
+    serialization:
+      indent-output: true
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+server:
+  port: 6002
+  servlet:
+    context-path: /uc
+
+mybatis:
+  mapper-locations:
+    - classpath:dao/*.xml
+    - classpath*:com/**/mapper/*.xml
+
+jwt:
+  tokenHeader: Authorization #JWT存储的请求头
+  secret: 123456 #1qwsdr567ujkop0 #JWT加解密使用的密钥
+  expiration: 604800 #JWT的超期限时间(60*60*24*7)
+  tokenHead: Bearer  #JWT负载中拿到开头
+
+ignored: #安全路径白名单
+  urls:
+    - /swagger-ui.html
+    - /swagger-resources/**
+    - /swagger/**
+    - /webjars/springfox-swagger-ui/**
+    - /v2/api-docs
+    - /**/*.js
+    - /**/*.css
+    - /**/*.png
+    - /**/*.ico
+    - /druid/**
+    - /actuator/**
+    - /noauth/**
+    - /sms/registry/**
+    - /sms/password/**
+
+news:
+  default:
+    view:
+      pic: http://39.98.36.167/pic/default.png #资讯默认图片
+
+#aliyun:
+#  accessKeyId: LTAI4FtAtTXmX7UqhptZDtNQ
+#  accessKeySecret: 6ftLAkFQQ62CKNgJ4XfvQVbCGpoc0m
+#  oss:
+#    Endpoint:
+#    BucketName:
+#
+#tencent:
+#  cos:
+#    qcloudDomain: https://wallet-1300785780.cos.ap-guangzhou.myqcloud.com
+#    qcloudPrefix: wallet
+#    qcloudAppId: 1300785780
+#    qcloudSecretId: AKID2UoyMi5LWZRWUYQBk8ReszwiKkS0QzCU
+#    qcloudSecretKey: MXyEJEyTZj1Ogonm1CE5qRF5lR29ALQQ
+#    qcloudBucketName: wallet
+#    qcloudRegion: gz
+  

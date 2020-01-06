@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.my.test.dao.SysRoleDao">
+    <resultMap id="SysRoleMap" type="com.my.test.model.SysRole" extends="com.my.test.mapper.SysRoleMapper.BaseResultMap">
+    </resultMap>
+
+    <select id="getByUserId" parameterType="java.lang.Long" resultMap="SysRoleMap">
+        select distinct r.*
+        from sys_user_role ur,sys_role r 
+            where ur.role_id=r.id  and ur.user_id=#{userId}
+    </select>
+
+    <insert id="insertBatch">
+        insert into sys_user_role (user_id, role_id) values 
+        <foreach collection="roleIds" item="roleId" separator="," >
+                (#{userId}, #{roleId})
+        </foreach>
+    </insert>
+</mapper>

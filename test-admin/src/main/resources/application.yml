@@ -1,0 +1,69 @@
+spring:
+  application:
+    name: test-admin # 应用名称
+  profiles:
+    active: dev #默认为开发环境
+  jackson:
+    serialization:
+      indent-output: true
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  servlet:
+    multipart: #配置文件上传
+      max-file-size: 20MB #设置上传的单个文件最大值，单位可以是 MB、KB，默认为 1MB
+      max-request-size: 150MB #设置多文件上传时，单次内多个文件的总量的最大值，单位可以是 MB、KB，默认为 10 M
+
+server:
+  port: 6004
+  servlet:
+    context-path: /admin
+  tomcat:
+    max-http-post-size: -1
+
+mybatis:
+  mapper-locations:
+    - classpath:dao/*.xml
+    - classpath*:com/**/mapper/*.xml
+
+jwt:
+  tokenHeader: Authorization #JWT存储的请求头
+  secret: wsxdr56yhbhu89ol #JWT加解密使用的密钥
+  expiration: 604800 #JWT的超期限时间(60*60*24)
+  tokenHead: Bearer  #JWT负载中拿到开头
+
+ignored: #安全路径白名单
+  urls:
+    - /swagger-ui.html
+    - /swagger-resources/**
+    - /swagger/**
+    - /webjars/springfox-swagger-ui/**
+    - /v2/api-docs
+    - /**/*.js
+    - /**/*.css
+    - /**/*.png
+    - /**/*.ico
+    - /actuator/**
+    - /druid/**
+    - /sys-users/login
+    - /sys-users/login2
+    - /admin/login
+
+logging:
+  level:
+    root: info #日志配置DEBUG,INFO,WARN,ERROR
+    cn.ztuo.tea: debug
+
+news:
+  default:
+    view:
+      pic: http://39.98.36.167/pic/default.png #资讯默认图片
+
+#tencent:
+#  cos:
+#    qcloudDomain: https://wallet-1300785780.cos.ap-guangzhou.myqcloud.com
+#    qcloudPrefix: wallet
+#    qcloudAppId: 1300785780
+#    qcloudSecretId: AKID2UoyMi5LWZRWUYQBk8ReszwiKkS0QzCU
+#    qcloudSecretKey: MXyEJEyTZj1Ogonm1CE5qRF5lR29ALQQ
+#    qcloudBucketName: wallet
+#    qcloudRegion: gz
